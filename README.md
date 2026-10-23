@@ -72,3 +72,24 @@ winver
 ![Winver(1)](<screenshots/01-LabEnvironment/OperatingSystems/Winver(1).PNG>)
 
 ## Active Directory
+
+### Installing Active Directory Domain Services
+
+With the virtual machines running, I moved on to configuring the Windows Server as a domain controller. I started by installing the Active Directory Domain Services (AD DS) role through Server Manager.
+
+AD DS provides a centralized way to manage users, computers, groups, and authentication within a Windows domain. Installing the role was the first step toward creating the domain that I would use throughout the rest of the lab.
+
+![Install_AD(4)](<screenshots/02-ActiveDirectory/AD_DS_&_Domain_Controller/Install_AD(4).PNG>)
+
+I selected Active Directory Domain Services from the available server roles and continued through the installation wizard. Once the installation finished, I went on to configure the server as a domain controller.
+
+![DC_Setup](<screenshots/02-ActiveDirectory/AD_DS_&_Domain_Controller/DC_Setup.PNG>)
+
+### Promoting the Server to a Domain Controller
+
+After installing AD DS, I used the Active Directory Domain Services Configuration Wizard to promote the server to a domain controller. I configured a new forest for the lab and created the domain **KiritoDomain.local**.
+
+![DC_Setup(1)](<screenshots/02-ActiveDirectory/AD_DS_&_Domain_Controller/DC_Setup(1).PNG>)
+
+During this process, I configured the domain controller options and set the Directory Services Restore Mode (DSRM) password. I continued through the prerequisite checks and completed the promotion process.
+
