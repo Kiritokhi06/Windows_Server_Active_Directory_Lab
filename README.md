@@ -5,6 +5,8 @@ Building a Windows Server home lab in VirtualBox to learn how to manage a Window
 ## Overview
 I started this project because I wanted to gain more hands-on experience with Windows Server and Active Directory managing users, computers, and other resources on a network.
 
+I followed the Active Directory activities in [EastCharmer's Windows Server Home Lab Project Tutorial](https://youtube.com/playlist?list=PLAdEnQWAAbfXMY2D4HVZOe-ChfTKmaJfQ&si=SUB2OV0Y0p_i0wIO), adapting the process to my VirtualBox environment running Windows Server 2025.
+
 I used Oracle VirtualBox to set up a Windows Server 2025 virtual machine and a Windows 11 client virtual machine. This gave me a way to practice configuring a domain controller and managing a Windows domain without needing any additional physical computers.
 
 Throughout this project, I followed a Windows Server home lab tutorial and worked through different tasks involving Active Directory, user and group management, Group Policy, and file permissions. I also ran into some issues with virtualization and network configuration I had to troubleshoot along the way.
