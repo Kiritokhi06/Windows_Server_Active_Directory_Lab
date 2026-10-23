@@ -93,3 +93,115 @@ After installing AD DS, I used the Active Directory Domain Services Configuratio
 
 During this process, I configured the domain controller options and set the Directory Services Restore Mode (DSRM) password. I continued through the prerequisite checks and completed the promotion process.
 
+![DC_Setup(2)](<screenshots/02-ActiveDirectory/AD_DS_&_Domain_Controller/DC_Setup(2).PNG>)
+
+After the configuration finished, the server restarted. I signed back in and verified that the Active Directory tools were available for managing the domain.
+
+![DC_Setup_Complete(1)](<screenshots/02-ActiveDirectory/AD_DS_&_Domain_Controller/DC_Setup_Complete(1).PNG>)
+
+### Creating Organizational Units
+
+Once the domain controller was configured, I began organizing the directory using Organizational Units (OUs). OUs provide a way to group directory objects, like users and computers, into a structure that makes them easier to manage.
+
+I created OUs to organize the lab’s directory objects by region, including the United States, Europe, and Asia. In the regional OUs, I created additional OUs for computers, servers, and users.
+
+![AD_Creating_OUs(5)](<screenshots/02-ActiveDirectory/Organizational_Units/AD_Creating_OUs(5).PNG>)
+
+This structure gave me a more organized directory to work with as I created accounts and groups and continued configuring the domain.
+
+### Creating Users and Groups
+
+After setting up the OU structure, I created user accounts to represent users in the domain. I entered the account information, configured passwords, and placed accounts in the appropriate OU.
+
+![AD_Creating_OUs_User(1)](<screenshots/02-ActiveDirectory/Users_&_Groups/AD_Creating_OUs_User(1).PNG>)
+
+I also created groups to organize accounts for administrative purposes. For example, I created an IT security group with a global scope. Security groups can be used to assign permissions to a collection of users rather than configuring access for every account individually.
+
+![AD_Creating_OUs_Group(1)](<screenshots/02-ActiveDirectory/Users_&_Groups/AD_Creating_OUs_Group(1).PNG>)
+
+I also created a distribution group named **DL-ITAdmins**. Unlike a security group, a distribution group is intended for email distribution rather than assigning access permissions to resources.
+
+![AD_Creating_OUs_Group(3)](<screenshots/02-ActiveDirectory/Users_&_Groups/AD_Creating_OUs_Group(3).PNG>)
+
+After creating the accounts and groups, I reviewed them in Active Directory Users and Computers to verify that the directory objects were present.
+
+![AD_Creating_OUs_User(4)](<screenshots/02-ActiveDirectory/Users_&_Groups/AD_Creating_OUs_User(4).PNG>)
+
+### Joining the Windows 11 Client to the Domain
+
+With the domain controller and directory structure in place, I moved to the Windows 11 client and attempted to join it to **KiritoDomain.local**. Joining the client to the domain would allow it to use domain accounts and receive centrally managed settings.
+
+I opened the client computer’s system properties and used the computer name and domain settings to initiate the domain join. I entered the domain name and supplied credentials with permission to join the computer.
+
+![Adding_Computer_to_Domain(2)](<screenshots/02-ActiveDirectory/Domain_Join_&_Authentication/Adding_Computer_to_Domain(2).PNG>)
+
+The initial domain join attempt led me to investigate the network configuration between the two virtual machines. Although both machines were running, the client wasn’t resolving the domain correctly. I documented the network troubleshooting separately and used those steps to identify and correct the issue.
+
+### Troubleshooting Domain Connectivity and DNS
+
+Both virtual machines initially used NAT network adapters. NAT itself wasn’t the problem, but the original adapter and DNS configuration wasn’t allowing the client to resolve and reach the domain controller correctly.
+
+I began by checking the network adapter settings and using **ipconfig** to review the IP configuration on the machines. This helped me examine the addresses assigned to the adapters and determine which DNS server the client was using.
+
+![Pre_Troubleshoot_Computer_Domain_Config(2)](<screenshots/07-Troubleshooting/Domain_Join_Netwrk_Troubleshooting/Pre_Troubleshoot_Computer_Domain_Config(2).PNG>)
+
+To correct the configuration, I created additional network adapters on both virtual machines and assigned static IP addresses so they could communicate on the lab network. I configured the client to use the domain controller’s IP address as its DNS server.
+
+![Computer_Domain_Config_Troubleshoot(6)](<screenshots/07-Troubleshooting/Domain_Join_Netwrk_Troubleshooting/Computer_Domain_Config_Troubleshoot(6).PNG>)
+
+While checking DNS, I also found that the domain controller’s NAT address had been registered in DNS. I removed the unwanted entry so that the client wouldn’t resolve the domain controller to the incorrect address.
+
+I then used **nslookup** to check whether the domain name was resolving through the domain controller’s DNS service.
+
+```text
+nslookup KiritoDomain.local
+```
+
+![Computer_Domain_Config_Troubleshoot(8)](<screenshots/07-Troubleshooting/Domain_Join_Netwrk_Troubleshooting/Computer_Domain_Config_Troubleshoot(8).PNG>)
+
+After correcting the network and DNS configuration, the domain name resolved to the domain controller’s lab IP address. I also tested connectivity between the machines to confirm that they could communicate over the lab network, via **ping**.
+
+![Computer_Domain_Config_Troubleshoot(9)](<screenshots/07-Troubleshooting/Domain_Join_Netwrk_Troubleshooting/Computer_Domain_Config_Troubleshoot(9).PNG>)
+
+With DNS and connectivity working, I reattempted the domain join again on the Windows 11 client.
+
+![Adding_Computer_to_Domain(3)](<screenshots/02-ActiveDirectory/Domain_Join_&_Authentication/Adding_Computer_to_Domain(3).PNG>)
+
+The client successfully joined **KiritoDomain.local**. Windows displayed a confirmation message, and I restarted the client to apply the change.
+
+![Adding_Computer_to_Domain(4)](<screenshots/02-ActiveDirectory/Domain_Join_&_Authentication/Adding_Computer_to_Domain(4).PNG>)
+
+### Testing Domain Authentication
+
+After restarting the client, I tested signing in with a domain user account rather than relying only on the local Windows account. This allowed me to verify that the client could authenticate against the domain.
+
+![Testing_Domain_Login(3)](<screenshots/02-ActiveDirectory/Domain_Join_&_Authentication/Testing_Domain_Login(3).PNG>)
+
+I also worked with the user account settings in Active Directory Users and Computers, including resetting a user’s password and requiring a password change at the next sign-in.
+
+![Testing_Domain_Login_Psw_Reset(1)](<screenshots/02-ActiveDirectory/Domain_Join_&_Authentication/Testing_Domain_Login_Psw_Reset(1).PNG>)
+
+These tests helped me verify the relationship between the domain controller, the client machine, and the user accounts managed through Active Directory.
+
+### Configuring Fine-Grained Password Policies
+
+I also explored fine-grained password policies through the Active Directory Administrative Center. These settings allow different password and account-lockout requirements to be applied to selected users or groups instead of relying exclusively on one domain-wide password policy.
+
+I created password settings objects for the lab and configured their settings through the Password Settings Container.
+
+![Fine_Grained_Passwords(4)](<screenshots/02-ActiveDirectory/Password_Policies/Fine_Grained_Passwords(4).PNG>)
+
+I then configured the policy’s application to a selected group and reviewed the resulting password settings objects.
+
+![Fine_Grained_Passwords(8)](<screenshots/02-ActiveDirectory/Password_Policies/Fine_Grained_Passwords(8).PNG>)
+
+## Group Policy
+
+After setting up Active Directory and joining the Windows 11 client to the domain, I moved on to Group Policy. Group policy allows administrators to manage settings for domain users and computers from a central location. Instead of manually configuring every computer, I could create Group Policy Objects (GPOs) on the domain controller and apply them to the appropriate users or computers.
+
+I used the Group Policy Management console on the domain controller to create and configure the policies for this part of the lab.
+
+![Group_Policy_Mgmt(1)](<screenshots/03-GroupPolicy/General_GPO_Management/Group_Policy_Mgmt(1).PNG>)
+
+### Creating Group Policy Objects
+
