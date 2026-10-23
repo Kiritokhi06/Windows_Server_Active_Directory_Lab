@@ -31,3 +31,10 @@ The goal of this project was to build a functional Windows domain environment wh
 - Configure file sharing and NTFS permissions
 - Practice storage quotas and file screening using File Server Resource Manager (FSRM)
 - Troubleshoot virtualization and domain connectivity issues
+
+## Lab Environment
+I created a virtual machine in Oracle VirtualBox to run Windows Server 2025. This machine served as the main server for the lab and would later be configured as the domain controller.
+
+The server would be responsible for hosting Active Directory Domain Services (AD DS) and managing domain accounts and other resources used throughout the project.
+
+![AD Domain Controller VM Creation](screenshots/01-LabEnvironment/VM_Setup/AD Domain Controller VM Creation.PNG) 
