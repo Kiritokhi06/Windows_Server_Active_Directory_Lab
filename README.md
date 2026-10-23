@@ -16,7 +16,7 @@ The goal of this project was to build a functional Windows domain environment wh
 > **Additional Documentation:**
 > Screenshots documenting the setup, configuration, and troubleshootin process are available throughout the repository and in the [`screenshots`](screenshots/) directory.
 
-## Lab Environment
+## Virtual Machine Setup
 - Virtualization software: Oracle VirtualBox
 - Server OS: Windows Server 2025
 - Client OS: Windows 11 Pro
