@@ -37,4 +37,4 @@ I created a virtual machine in Oracle VirtualBox to run Windows Server 2025. Thi
 
 The server would be responsible for hosting Active Directory Domain Services (AD DS) and managing domain accounts and other resources used throughout the project.
 
-![AD Domain Controller VM Creation](screenshots/01-LabEnvironment/VM_Setup/AD Domain Controller VM Creation.PNG) 
+![AD Domain Controller VM Creation](<screenshots/01-LabEnvironment/VM_Setup/AD Domain Controller VM Creation.PNG>)
