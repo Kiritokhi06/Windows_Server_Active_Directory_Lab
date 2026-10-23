@@ -38,3 +38,37 @@ I created a virtual machine in Oracle VirtualBox to run Windows Server 2025. Thi
 The server would be responsible for hosting Active Directory Domain Services (AD DS) and managing domain accounts and other resources used throughout the project.
 
 ![AD Domain Controller VM Creation](<screenshots/01-LabEnvironment/VM_Setup/AD Domain Controller VM Creation.PNG>)
+
+I also created a separate virtual machine running Windows 11 Pro. This machine acted as the client on the domain. 
+
+The client was important because I wanted to test the environment from the perspective of a regular domain computer. Instead of only checking configurations on the server, I could attempt to join the client to the domain, sign in with domain credentials, and test policies and shared resources.
+
+![Helpdesk VM Creation](<screenshots/01-LabEnvironment/VM_Setup/Helpdesk VM Creation.PNG>)
+
+### Troubleshooting Virtualization
+During the initial setup, I ran into an issue where the virtual machines would abort when I attempted to start them. This prevented me from continuing with the Windows installations and the rest of the lab.
+
+After investigating the problem, I found through Task Manager that virtualization was disabled in my PC’s BIOS. I restarted the computer and entered the BIOS settings to locate the virtualization options.
+
+![Helpdesk VM Virtualization Troubleshooting(1)](<screenshots/07-Troubleshooting/VM_Virtualization_BIOS_Troubleshooting/Helpdesk VM Virtualization Troubleshooting(1).PNG>)
+
+I navigated through the BIOS settings until I located the advanced CPU configuration options. I enabled virtualization and saved changes before restarting the computer.
+
+![BIOS Step 4](<screenshots/07-Troubleshooting/VM_Virtualization_BIOS_Troubleshooting/BIOS Step 4.jpeg>)
+
+After enabling virtualization, I checked Task Manager to make sure virtualization was turned on, and returned to VirtualBox to try starting the virtual machines again. I was able to continue with the Windows installation process and proceed with the rest of the lab.
+
+![Helpdesk VM Virtualization Troubleshooting(3)](<screenshots/07-Troubleshooting/VM_Virtualization_BIOS_Troubleshooting/Helpdesk VM Virtualization Troubleshooting(3).PNG>)
+
+### Verifying the Operating System
+After getting the environment running, I used Windows’ built-in version information to check the installed operating system.
+
+I did this by using:
+
+```text
+winver
+```
+
+![Winver(1)](<screenshots/01-LabEnvironment/OperatingSystems/Winver(1).PNG>)
+
+## Active Directory
