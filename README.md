@@ -231,7 +231,7 @@ Next, I created an Account Lockout GPO to limit repeated unsuccessful sign-in at
 
 These settings allowed me to practice configuring account-lockout behavior to help protect domain accounts against repeated password guesses.
 
-1[Account_Lockout_GPO(3)](<screenshots/03-GroupPolicy/Password_&_Account_Policies/Account_Lockout_GPO(3).PNG>)
+![Account_Lockout_GPO(3)](<screenshots/03-GroupPolicy/Password_&_Account_Policies/Account_Lockout_GPO(3).PNG>)
 
 I then tested the account-lockout configuration by attempting to sign in with invalid credentials. The client displayed a message indicating that the account was locked and couldn’t be used to sign in.
 
