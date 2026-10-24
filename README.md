@@ -14,7 +14,7 @@ Throughout this project, I followed a Windows Server home lab tutorial and worke
 The goal of this project was to build a functional Windows domain environment where I could practice common system administration tasks and better understand how these services work together.
 
 > **Additional Documentation:**
-> Screenshots documenting the setup, configuration, and troubleshootin process are available throughout the repository and in the [`screenshots`](screenshots/) directory.
+> Screenshots documenting the setup, configuration, and troubleshooting process are available throughout the repository and in the [`screenshots`](screenshots/) directory.
 
 ## Virtual Machine Setup
 - Virtualization software: Oracle VirtualBox
@@ -440,6 +440,8 @@ I created the account through Active Directory Users and Computers and organized
 I then downloaded Microsoft Sysinternals on the Windows client that was joined to the domain. Sysinternals is a collection of utilities that can help admins manage and troubleshoot Windows systems.
 
 For this activity, I used the **Autologon** utility to configure automatic sign-in with the service account. I entered the account credentials and domain, then enabled the setting.
+
+> **Security Note:** This was a controlled lab exercise to practice automatic sign-in using Microsoft Sysinternals Autologon. In a production environment, automatic sign-in can introduce security risks, so account privileges and credential protection must be carefully considered.
 
 ![Sysinternals(4)](<screenshots/06-ServiceAcc&Sysinternals/Sysinternals_Tools/Sysinternals(4).PNG>)
 
